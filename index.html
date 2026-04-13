@@ -1,0 +1,100 @@
+<!-- ===================== index.html ===================== -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão de Clientes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./Styles/style.css" />
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <div class="noise"></div>
+
+  <main class="wrap">
+    <section class="shell">
+      <div class="hero">
+        <div>
+          <div class="top-pill">PAINEL DE CLIENTES</div>
+          <h1>Entre no  sistema e gerencie seus clientes</h1>
+          <div class="hero-panels">
+            <div class="mini-card">
+              <strong>+ de 1.248</strong>
+              <span>Clientes gerenciados</span>
+            </div>
+            <div class="mini-card">
+              <strong>100%</strong>
+              <span>Taxa de entrega</span>
+            </div>
+            <div class="mini-card">
+              <strong>Com</strong>
+              <span>Alertas automáticos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-card">
+        <div class="login-inner">
+          <div class="brand">
+            <div class="brand-mark"></div>
+            <div>
+              <h2>ClientFlow</h2>
+              <p>Gestão de clientes e vencimentos</p>
+            </div>
+          </div>
+
+          <div class="login-head">
+            <h3>Bem-vindo</h3>
+            <span>Acesse sua conta para continuar.</span>
+          </div>
+
+          <form id="loginForm" novalidate>
+            <div class="field">
+              <label for="usuario">Usuário</label>
+              <div class="input-wrap">
+                <input id="usuario" name="usuario" type="text" placeholder="Digite seu usuário" />
+              </div>
+              <small class="error-message" id="usuarioError"></small>
+            </div>
+
+            <div class="field">
+              <label for="senha">Senha</label>
+              <div class="input-wrap password-wrap">
+                <input id="senha" name="senha" type="password" placeholder="Digite sua senha" />
+                <button class="toggle-password" type="button" id="togglePassword" aria-label="Mostrar ou ocultar senha">
+                  👁️
+                </button>
+              </div>
+              <small class="error-message" id="senhaError"></small>
+            </div>
+
+            <div class="meta-row">
+              <label class="check"><input type="checkbox" checked /> Lembrar acesso</label>
+              <a href="#">Esqueci minha senha</a>
+            </div>
+
+            <button class="btn" id="loginButton" type="submit">
+              <span class="btn-text">Entrar no painel</span>
+              <span class="btn-loader"></span>
+            </button>
+
+            <p class="form-message" id="formMessage"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./scripts/script.js"></script>
+
+</body>
+</html>
+
+
+  

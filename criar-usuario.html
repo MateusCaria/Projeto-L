@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Usuários</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./Styles/criar-usuario.css">
+</head>
+
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <div class="noise"></div>
+
+  <main class="page">
+    <div class="lista">
+      <h3>Usuários cadastrados</h3>
+      <ul id="listaUsuarios"></ul>
+    </div>
+    <section class="card">
+      <div class="card-top">
+        <div class="logo"></div>
+        <div>
+          <h1>Criar Usuário</h1>
+          <p>Cadastre acessos manualmente para seus clientes.</p>
+        </div>
+      </div>
+
+      <form id="createUserForm" novalidate>
+        <div class="field">
+          <label for="usuario">Usuário</label>
+          <input id="usuario" name="usuario" type="text" placeholder="Digite o nome do usuário" />
+          <small class="error-message" id="usuarioError"></small>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="password-wrap">
+            <input id="senha" name="senha" type="password" placeholder="Digite a senha" />
+            <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+          </div>
+          <small class="error-message" id="senhaError"></small>
+        </div>
+
+        <div class="field">
+          <label for="tipo">Tipo de usuário</label>
+          <select id="tipo" name="tipo">
+            <option value="cliente">Cliente</option>
+            <option value="admin">Admin</option>
+          </select>
+          <small class="error-message" id="tipoError"></small>
+        </div>
+
+        <button class="btn" id="createButton" type="submit">
+          <span class="btn-text">Criar usuário</span>
+          <span class="btn-loader"></span>
+        </button>
+
+        <p class="form-message" id="formMessage"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="./scripts/criar-usuario.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel SaaS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./Styles/dashboard.css">
+  <link rel="stylesheet" href="./Styles/menu-styles.css">
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <div class="noise"></div>
+
+  <main class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <h1>ClientFlow</h1>
+          <p>Painel de clientes</p>
+        </div>
+      </div>
+
+      <div class="sidebar-user">
+        <span>Usuário logado</span>
+        <strong id="usuarioLogadoNome">-</strong>
+      </div>
+
+      <div class="menu-lateral">
+        <button class="menu-btn active" onclick="mostrarTela('dashboard')">Painel</button>
+        <button class="menu-btn" onclick="mostrarTela('clientes')">Clientes</button>
+        <button class="menu-btn" onclick="mostrarTela('vencimentos')">Vencimentos</button>
+        <button class="menu-btn" onclick="mostrarTela('mensagem')">Mensagem WhatsApp</button>
+      </div>
+
+      <button class="logout-btn" id="logoutBtn">Sair</button>
+    </aside>
+
+    <section class="content">
+      <header class="topbar">
+        <div>
+          <h2>Painel</h2>
+          <p>Gerencie seus clientes e vencimentos em um só lugar.</p>
+        </div>
+      </header>
+
+      <div class="diagnostico-box" id="diagnosticoBox" style="display:none;">
+        <strong>Diagnóstico automático de datas</strong>
+        <p id="diagnosticoMensagem">-</p>
+        <pre id="diagnosticoDetalhes"></pre>
+      </div>
+
+      <div id="tela-dashboard" class="tela">
+        <section class="stats">
+          <div class="stat-card">
+            <span>Total de clientes</span>
+            <strong id="statTotal">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Vencendo hoje</span>
+            <strong id="statHoje">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Vencendo em breve</span>
+            <strong id="statBreve">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Vencidos</span>
+            <strong id="statVencidos">0</strong>
+          </div>
+        </section>
+
+        <section class="dashboard-graficos">
+          <div class="dashboard-graficos-topo">
+            <div class="grafico-card">
+              <div class="grafico-card-head">
+                <h3>Status dos clientes</h3>
+              </div>
+              <canvas id="graficoStatus"></canvas>
+            </div>
+
+            <div class="grafico-card">
+              <div class="grafico-card-head">
+                <h3>Financeiro</h3>
+              </div>
+              <canvas id="graficoFinanceiro"></canvas>
+            </div>
+
+            <div class="grafico-card">
+              <div class="grafico-card-head">
+                <h3>Faixas de vencimento</h3>
+              </div>
+              <canvas id="graficoFaixas"></canvas>
+            </div>
+          </div>
+
+          <div class="dashboard-grafico-bottom">
+            <div class="grafico-card grande">
+              <div class="grafico-card-head grafico-card-head-space">
+                <h3>Clientes cadastrados</h3>
+
+                <div class="grafico-toggle">
+                  <button type="button" class="grafico-toggle-btn active" id="toggleDia">Por dia</button>
+                  <button type="button" class="grafico-toggle-btn" id="toggleMes">Por mês</button>
+                </div>
+              </div>
+
+              <canvas id="graficoCadastros"></canvas>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div id="tela-clientes" class="tela" style="display:none;">
+        <section class="main-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Novo cliente</h3>
+            <p>Cadastre os dados completos do seu cliente.</p>
+          </div>
+
+          <form id="clienteForm" novalidate>
+            <div class="field">
+              <label for="nome">Nome do cliente</label>
+              <input id="nome" type="text" placeholder="Digite o nome do cliente" />
+              <small class="error-message" id="nomeError"></small>
+            </div>
+
+            <div class="field">
+              <label for="usuario_cliente">Usuário do cliente</label>
+              <input id="usuario_cliente" type="text" placeholder="Digite o usuário do cliente" />
+              <small class="error-message" id="usuarioClienteError"></small>
+            </div>
+
+            <div class="field">
+              <label for="telefone">Número de telefone</label>
+              <input id="telefone" type="tel" inputmode="numeric" placeholder="(00) 00000-0000" maxlength="15" />
+              <small class="error-message" id="telefoneError"></small>
+            </div>
+
+            <div class="field">
+              <label for="valor_pago">Valor pago</label>
+              <input id="valor_pago" type="text" inputmode="decimal" placeholder="0,00" />
+              <small class="error-message" id="valorPagoError"></small>
+            </div>
+
+            <div class="field">
+              <label for="data_vencimento">Data de vencimento</label>
+              <input id="data_vencimento" type="text" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" />
+              <small class="error-message" id="dataError"></small>
+            </div>
+
+            <div class="field">
+              <label>Status inicial</label>
+              <div class="status-chips" id="statusChips">
+                <button type="button" class="status-chip active" data-status="ativo">Ativo</button>
+                <button type="button" class="status-chip" data-status="pendente">Pendente</button>
+              </div>
+            </div>
+
+            <button class="primary-btn" id="saveClienteBtn" type="submit">
+              <span class="btn-text">Cadastrar cliente</span>
+              <span class="btn-loader"></span>
+            </button>
+
+            <p class="form-message" id="formMessage"></p>
+          </form>
+        </div>
+
+        <div class="table-card">
+          <div class="table-head">
+            <div>
+              <h3>Seus clientes</h3>
+              <p>Busque por nome, usuário ou WhatsApp e filtre por vencimento.</p>
+            </div>
+          </div>
+
+          <div class="filters">
+            <input type="text" id="busca" placeholder="Buscar por nome, usuário ou WhatsApp..." />
+            <input type="text" id="dataInicio" inputmode="numeric" placeholder="De: dd/mm/aaaa" maxlength="10" />
+            <input type="text" id="dataFim" inputmode="numeric" placeholder="Até: dd/mm/aaaa" maxlength="10" />
+            <button class="secondary-btn" id="filtrarBtn" type="button">Filtrar</button>
+            <button class="ghost-btn" id="limparFiltrosBtn" type="button">Limpar</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>WhatsApp</th>
+                  <th>Vencimento</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="clientesTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="emptyState">
+            Nenhum cliente encontrado.
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <div id="tela-mensagem" class="tela" style="display:none;">
+        <h2>Mensagem de cobrança</h2>
+
+        <textarea id="mensagemPadrao" rows="6"></textarea>
+
+        <div class="info-msg">
+          Variáveis disponíveis:
+          <br>{nome} | {data} | {valor}
+        </div>
+
+        <button onclick="salvarMensagem()">Salvar</button>
+      </div>
+
+      <div id="tela-vencimentos" class="tela" style="display:none;">
+        <h2>Vencimentos</h2>
+        <p>Funcionalidade em desenvolvimento...</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="statusMenuGlobal" class="status-menu-global">
+    <button type="button" class="status-menu-option" data-status="ativo">Ativo</button>
+    <button type="button" class="status-menu-option" data-status="pendente">Pendente</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./scripts/dashboard.js"></script>
+</body>
+</html>
